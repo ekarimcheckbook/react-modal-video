@@ -73,7 +73,7 @@ export default class ModalVideo extends React.Component {
 
   getYoutubeUrl(youtube, videoId) {
     const query = this.getQueryString(youtube)
-    return '//www.youtube.com/embed/' + videoId + '?' + query
+    return '//www.youtube.com/embed/' + videoId + '?' + query + '&mute=1'
   }
 
   getVimeoUrl(vimeo, videoId) {
@@ -142,7 +142,6 @@ ModalVideo.defaultProps = {
   isOpen: false,
   youtube: {
     autoplay: 1,
-    mute: 1,
     cc_load_policy: 1,
     color: null,
     controls: 1,
