@@ -142,6 +142,7 @@ ModalVideo.defaultProps = {
   isOpen: false,
   youtube: {
     autoplay: 1,
+    mute: 1,
     cc_load_policy: 1,
     color: null,
     controls: 1,
