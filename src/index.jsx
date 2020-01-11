@@ -112,7 +112,6 @@ export default class ModalVideo extends React.Component {
     const style = {
       paddingBottom: this.getPadding(this.props.ratio)
     }
-
     return (
       <CSSTransition
         classNames={this.props.classNames.modalVideoEffect}
@@ -122,16 +121,6 @@ export default class ModalVideo extends React.Component {
           if (!this.state.isOpen) {
             return null;
           }
-
-          if (this.props.channel == 'video') {
-            <Player>
-              <source src={this.getVideoUrl(this.props, this.props.videoId)} />
-            </Player>
-          } else {
-            let video = <iframe width='460' height='230' src={this.getVideoUrl(this.props, this.props.videoId)} frameBorder='0' allowFullScreen={this.props.allowFullScreen} tabIndex='-1' />
-          }
-
-
           return (
             <div className={this.props.classNames.modalVideo} tabIndex='-1' role='dialog'
               aria-label={this.props.aria.openMessage} onClick={this.closeModal} ref={node => { this.modal = node; }} onKeyDown={this.updateFocus}>
@@ -143,7 +132,9 @@ export default class ModalVideo extends React.Component {
                 <div className={this.props.classNames.modalVideoInner}>
                   <div className={this.props.classNames.modalVideoIframeWrap} style={style}>
                     <button className={this.props.classNames.modalVideoCloseBtn} aria-label={this.props.aria.dismissBtnMessage} ref={node => { this.modalbtn = node; }} onKeyDown={this.updateFocus} />
-                    {video}
+                    {this.props.channel == 'video' ? (
+                      <Player><source src={this.getVideoUrl(this.props, this.props.videoId)} /></Player>
+                    ): <iframe width='460' height='230' src={this.getVideoUrl(this.props, this.props.videoId)} frameBorder='0' allowFullScreen={this.props.allowFullScreen} tabIndex='-1' />}
                   </div>
                 </div>
               </div>
