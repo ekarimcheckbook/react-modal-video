@@ -49,6 +49,11 @@ export default class ModalVideo extends React.Component {
     }
   }
 
+  handleChildClick(e) {
+    e.stopPropagation();
+    console.log('child');
+  }
+
   updateFocus(e) {
     if (e.keyCode === 9) {
       e.preventDefault()
@@ -128,7 +133,7 @@ export default class ModalVideo extends React.Component {
                 rel="stylesheet"
                 href="https://video-react.github.io/assets/video-react.css"
               />
-              <div className={this.props.classNames.modalVideoBody}>
+              <div className={this.props.classNames.modalVideoBody} onClick={this.handleChildClick}>
                 <div className={this.props.classNames.modalVideoInner}>
                   <div className={this.props.classNames.modalVideoIframeWrap} style={style}>
                     <button className={this.props.classNames.modalVideoCloseBtn} aria-label={this.props.aria.dismissBtnMessage} ref={node => { this.modalbtn = node; }} onKeyDown={this.updateFocus} />
