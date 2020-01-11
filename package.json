@@ -46,7 +46,8 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
-    "react-transition-group": "^2.2.1"
+    "react-transition-group": "^2.2.1",
+    "video-react": "^0.14.1"
   },
   "peerDependencies": {
     "react": "^16.2.0",

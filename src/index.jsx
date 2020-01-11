@@ -1,9 +1,11 @@
 import React from 'react'
 import CSSTransition from 'react-transition-group/CSSTransition';
+import { Player } from 'video-react';
+
 
 export default class ModalVideo extends React.Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       isOpen: false
@@ -12,12 +14,12 @@ export default class ModalVideo extends React.Component {
     this.updateFocus = this.updateFocus.bind(this)
   }
 
-  openModal () {
-    this.setState({isOpen: true})
+  openModal() {
+    this.setState({ isOpen: true })
   }
 
-  closeModal () {
-    this.setState({isOpen: false})
+  closeModal() {
+    this.setState({ isOpen: false })
     if (typeof this.props.onClose === 'function') {
       this.props.onClose();
     }
@@ -41,13 +43,13 @@ export default class ModalVideo extends React.Component {
     return { isOpen: props.isOpen };
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     if (this.state.isOpen && this.modal) {
       this.modal.focus();
     }
   }
 
-  updateFocus (e) {
+  updateFocus(e) {
     if (e.keyCode === 9) {
       e.preventDefault()
       e.stopPropagation()
@@ -59,7 +61,7 @@ export default class ModalVideo extends React.Component {
     }
   }
 
-  getQueryString (obj) {
+  getQueryString(obj) {
     let url = ''
     for (var key in obj) {
       if (obj.hasOwnProperty(key)) {
@@ -93,6 +95,8 @@ export default class ModalVideo extends React.Component {
       return this.getVimeoUrl(opt.vimeo, videoId)
     } else if (opt.channel === 'youku') {
       return this.getYoukuUrl(opt.youku, videoId)
+    } else {
+      return videoId
     }
   }
 
@@ -119,14 +123,27 @@ export default class ModalVideo extends React.Component {
             return null;
           }
 
+          if (this.props.channel == 'video') {
+            <Player>
+              <source src={this.getVideoUrl(this.props, this.props.videoId)} />
+            </Player>
+          } else {
+            let video = <iframe width='460' height='230' src={this.getVideoUrl(this.props, this.props.videoId)} frameBorder='0' allowFullScreen={this.props.allowFullScreen} tabIndex='-1' />
+          }
+
+
           return (
             <div className={this.props.classNames.modalVideo} tabIndex='-1' role='dialog'
               aria-label={this.props.aria.openMessage} onClick={this.closeModal} ref={node => { this.modal = node; }} onKeyDown={this.updateFocus}>
+              <link
+                rel="stylesheet"
+                href="https://video-react.github.io/assets/video-react.css"
+              />
               <div className={this.props.classNames.modalVideoBody}>
                 <div className={this.props.classNames.modalVideoInner}>
                   <div className={this.props.classNames.modalVideoIframeWrap} style={style}>
                     <button className={this.props.classNames.modalVideoCloseBtn} aria-label={this.props.aria.dismissBtnMessage} ref={node => { this.modalbtn = node; }} onKeyDown={this.updateFocus} />
-                    <iframe width='460' height='230' src={this.getVideoUrl(this.props, this.props.videoId)} frameBorder='0' allowFullScreen={this.props.allowFullScreen} tabIndex='-1' />
+                    {video}
                   </div>
                 </div>
               </div>
