@@ -133,13 +133,15 @@ export default class ModalVideo extends React.Component {
                 rel="stylesheet"
                 href="https://video-react.github.io/assets/video-react.css"
               />
-              <div className={this.props.classNames.modalVideoBody} onClick={this.handleChildClick}>
+              <div className={this.props.classNames.modalVideoBody}>
                 <div className={this.props.classNames.modalVideoInner}>
                   <div className={this.props.classNames.modalVideoIframeWrap} style={style}>
                     <button className={this.props.classNames.modalVideoCloseBtn} aria-label={this.props.aria.dismissBtnMessage} ref={node => { this.modalbtn = node; }} onKeyDown={this.updateFocus} />
-                    {this.props.channel == 'video' ? (
-                      <Player><source src={this.getVideoUrl(this.props, this.props.videoId)} /></Player>
-                    ): <iframe width='460' height='230' src={this.getVideoUrl(this.props, this.props.videoId)} frameBorder='0' allowFullScreen={this.props.allowFullScreen} tabIndex='-1' />}
+                    <div onClick={this.handleChildClick}>
+                      {this.props.channel == 'video' ? (
+                        <Player autoPlay muted><source src={this.getVideoUrl(this.props, this.props.videoId)} /></Player>
+                      ) : <iframe width='460' height='230' src={this.getVideoUrl(this.props, this.props.videoId)} frameBorder='0' allowFullScreen={this.props.allowFullScreen} tabIndex='-1' />}
+                    </div>
                   </div>
                 </div>
               </div>
