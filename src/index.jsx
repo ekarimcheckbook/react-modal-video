@@ -8,7 +8,8 @@ export default class ModalVideo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isOpen: false
+      isOpen: false,
+      isMinimized: false
     }
     this.closeModal = this.closeModal.bind(this)
     this.updateFocus = this.updateFocus.bind(this)
@@ -19,11 +20,16 @@ export default class ModalVideo extends React.Component {
   }
 
   closeModal() {
-    this.setState({ isOpen: false })
-    if (typeof this.props.onClose === 'function') {
-      this.props.onClose();
+    if (this.state.isMinimized) {
+      this.setState({ isOpen: false })
+      if (typeof this.props.onClose === 'function') {
+        this.props.onClose();
+      }
+    } else {
+      this.setState({ isMinimized: true })
+      this.setState({ isMinimized: true })
     }
-  }
+  } 
 
   keydownHandler(e) {
     if (e.keyCode === 27) {
@@ -127,12 +133,12 @@ export default class ModalVideo extends React.Component {
             return null;
           }
           return (
-            <div className={this.props.classNames.modalVideo} tabIndex='-1' role='dialog'
+            <div className={`${this.props.classNames.modalVideo} ${this.state.isMinimized ? '.modal-minimized': ''}`} tabIndex='-1' role='dialog'
               aria-label={this.props.aria.openMessage} onClick={this.closeModal} ref={node => { this.modal = node; }} onKeyDown={this.updateFocus}>
               <link
                 rel="stylesheet"
                 href="https://video-react.github.io/assets/video-react.css"
-              />
+              /> 
               <div className={this.props.classNames.modalVideoBody}>
                 <div className={this.props.classNames.modalVideoInner}>
                   <div className={this.props.classNames.modalVideoIframeWrap} style={style}>
