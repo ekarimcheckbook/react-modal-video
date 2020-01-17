@@ -23,10 +23,10 @@ $backdrop-color: rgba(0, 0, 0, .5);
 }
 
 .modal-minimized {
-	width: 25%;
-	height: 25%;
-	bottom: 0;
-	right: 0;
+	width: 25% !important;
+	height: 25% !important;
+	bottom: 0 !important;
+	right: 0 !important;
 } 
 
 .modal-video {
