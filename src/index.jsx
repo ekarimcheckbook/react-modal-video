@@ -20,15 +20,15 @@ export default class ModalVideo extends React.Component {
   }
 
   closeModal() {
-    if (this.state.isMinimized) {
-      this.setState({ isOpen: false })
-      if (typeof this.props.onClose === 'function') {
-        this.props.onClose();
-      }
-    } else {
       this.setState({ isMinimized: true })
-    }
-  } 
+  }
+  
+  closeModalFully() {
+    this.setState({ isOpen: false })
+    if (typeof this.props.onClose === 'function') {
+      this.props.onClose();
+    }  
+  }
 
   keydownHandler(e) {
     if (e.keyCode === 27) {
@@ -143,7 +143,7 @@ export default class ModalVideo extends React.Component {
               <div className={this.props.classNames.modalVideoBody}>
                 <div className={this.props.classNames.modalVideoInner}>
                   <div className={this.props.classNames.modalVideoIframeWrap} style={style}>
-                    <button className={this.props.classNames.modalVideoCloseBtn} aria-label={this.props.aria.dismissBtnMessage} ref={node => { this.modalbtn = node; }} onKeyDown={this.updateFocus} />
+                    <button className={this.props.classNames.modalVideoCloseBtn} onClick={this.closeModalFully} aria-label={this.props.aria.dismissBtnMessage} ref={node => { this.modalbtn = node; }} onKeyDown={this.updateFocus} />
                     <div onClick={this.handleChildClick}>
                       {this.props.channel == 'video' ? (
                         <Player autoPlay muted><source src={this.getVideoUrl(this.props, this.props.videoId)} /></Player>
