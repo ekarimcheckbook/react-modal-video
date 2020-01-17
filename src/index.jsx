@@ -133,7 +133,7 @@ export default class ModalVideo extends React.Component {
             return null;
           }
           return (
-            <div className={`${this.props.classNames.modalVideo} ${this.state.isMinimized ? '.modal-minimized': ''}`} tabIndex='-1' role='dialog'
+            <div className={`${this.props.classNames.modalVideo} ${this.state.isMinimized ? 'modal-minimized': ''}`} tabIndex='-1' role='dialog'
               aria-label={this.props.aria.openMessage} onClick={this.closeModal} ref={node => { this.modal = node; }} onKeyDown={this.updateFocus}>
               <link
                 rel="stylesheet"
