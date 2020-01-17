@@ -27,7 +27,6 @@ export default class ModalVideo extends React.Component {
       }
     } else {
       this.setState({ isMinimized: true })
-      this.setState({ isMinimized: true })
     }
   } 
 
@@ -56,8 +55,10 @@ export default class ModalVideo extends React.Component {
   }
 
   handleChildClick(e) {
+    if (this.state.isMinimized) {
+      this.setState({ isMinimized: false })
+    }
     e.stopPropagation();
-    console.log('child');
   }
 
   updateFocus(e) {
