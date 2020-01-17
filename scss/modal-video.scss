@@ -25,6 +25,8 @@ $backdrop-color: rgba(0, 0, 0, .5);
 .modal-minimized {
 	width: 25% !important;
 	height: 25% !important;
+	top: auto !important;
+	left:auto !important;
 	bottom: 0 !important;
 	right: 0 !important;
 } 
